@@ -4,6 +4,7 @@
 import click
 import progressbar
 import time
+import sound
 
 @click.command()
 @click.option('--minutes', '-m', help='Number of minutes, default 25.')
@@ -28,6 +29,8 @@ def main(minutes, seconds, log):
         time.sleep(1)
         
     print("Take a 5 minutes break")
+    sound.play()
+
 
     if log is not None:
         log_file = open(log, 'a')
