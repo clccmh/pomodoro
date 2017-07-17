@@ -7,13 +7,14 @@ import time
 import sound
 
 @click.command()
-@click.option('--minutes', '-m', help='Number of minutes, default 25.')
+@click.option('--minutes', '-m', help='number of minutes, default 25.')
 @click.option('--seconds', '-s', help='Number of seconds.')
 @click.option('--log', '-l', help='The file to which log information shall be appended.')
 @click.option('--alarm/--no-alarm', '-a', help='Plays a sound at the end of the timer.', default=False)
+
 def main(minutes, seconds, log, alarm):
     bar = progressbar.ProgressBar(widgets=[
-        progressbar.Bar(),
+        progressbar.Bar(), progressbar.ETA(),
     ])
     
     if minutes is None:
@@ -36,7 +37,7 @@ def main(minutes, seconds, log, alarm):
 
     if log is not None:
         log_file = open(log, 'a')
-        log_file.write(time.strftime('%m.%d.%Y') + "," + str(minutes) + "," + str(seconds) + "\n")
+        log_file.write(time.strftime('%Y.%m.%d.%H.%M') + "," + str(minutes) + "," + str(seconds) + "\n")
         log_file.close()
 
 if __name__ == '__main__':
